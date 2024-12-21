@@ -1,0 +1,144 @@
+assessment-login.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessments Login</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #6e7cbb, #344a77);
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #e3e6f3;
+      padding: 12px;
+      font-size: 1rem;
+      box-shadow: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: #344a77;
+      box-shadow: 0 0 5px rgba(52, 74, 119, 0.3);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      background-color: #344a77;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #1f2d4d;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="logo">
+      ISL Mate
+    </div>
+    <h2>Login</h2>
+    <form action="javascript:void(0);" method="POST" onsubmit="goToassessmentquestionsPage()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="First Name + Last Name" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <div class="form-group">
+        <label for="language">Preferred Language</label>
+        <select class="form-control" id="language" name="language" required>
+          <option value="en">English</option>
+          <option value="mr">Marathi</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ageGroup">Age Group</label>
+        <select class="form-control" id="ageGroup" name="ageGroup" required>
+          <option value="0-9">0-9</option>
+          <option value="10-17">10-17</option>
+          <option value="18-25">18-25</option>
+          <option value="26-35">26-35</option>
+          <option value="36-45">36-45</option>
+          <option value="46+">46+</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Take the Assessments</button>
+    </form>
+  </div>
+
+  <script>
+    function goToassessmentquestionsPage() {
+      // Redirect to the assessment-questions page and replace the current page in history
+      window.location.replace("assessment-questions.html"); // Replace with the actual assessment-questions page URL
+    }
+  </script>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
