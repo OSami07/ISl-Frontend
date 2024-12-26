@@ -42,6 +42,30 @@
       letter-spacing: 0.5px;
     }
 
+    .register-container {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .register-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     .form-group {
       margin-bottom: 20px;
     }
@@ -80,6 +104,14 @@
     .btn-primary:active {
       transform: translateY(2px);
     }
+  
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
 
     .message {
       text-align: center;
@@ -102,23 +134,64 @@
       font-size: 2.5rem;
       font-weight: bold;
     }
+
+
+    /* Modal Styles */
+  .modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+  .modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
   </style>
 </head>
 <body>
 
-  <div class="login-container">
+  <div class="register-container">
     <div class="logo">
       ISL Mate
     </div>
     <h2>Register</h2>
     <form id="registerForm" onsubmit="return handleRegister(event)">
       <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
-      </div>
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
       </div>
       <div class="form-group">
         <label for="language">Language Preferred</label>
@@ -130,6 +203,10 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+      </div>
+      <div class="form-group">
         <label for="password">Create Password</label>
         <input type="password" id="password" class="form-control" placeholder="Create a password" required>
       </div>
@@ -138,33 +215,126 @@
     <div id="message" class="message"></div>
   </div>
 
+  <div id="popupModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3>Welcome to ISL Mate</h3>
+      <p>Do you want to log in or register?</p>
+      <div class="button-group">
+        <button id="loginButton" class="btn btn-primary">Log In</button>
+        <button id="registerButton" class="btn btn-secondary">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="emailExistsModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3>Email Already Exists</h3>
+      <p>This email is already registered. Please log in to continue.</p>
+      <button id="redirectToLogin" class="btn btn-primary">Go to Login</button>
+    </div>
+  </div>
+
   <script>
-    function handleRegister(event) {
-      event.preventDefault(); // Prevent page refresh
-      const firstName = document.getElementById("firstName").value;
-      const lastName = document.getElementById("lastName").value;
-      const language = document.getElementById("language").value;
-      const password = document.getElementById("password").value;
 
-      if (firstName && lastName && language && password) {
-        // Password validation: minimum 6 characters with at least one digit
-        const passwordRegex = /^(?=.*\d)[A-Za-z\d]{6,}$/;
-        if (!passwordRegex.test(password)) {
-          document.getElementById("message").innerHTML = '<p class="text-danger">Password must be at least 6 characters long and include at least one digit.</p>';
-        } else {
-          document.getElementById("message").innerHTML = '<p class="text-success">Registration successful! Redirecting to assessments...</p>';
-          
-          // Replace the history state to prevent going back to register page
-          history.replaceState(null, null, "student.html");
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("popupModal");
+    const loginButton = document.getElementById("loginButton");
+    const registerButton = document.getElementById("registerButton");
 
-          setTimeout(() => {
-            window.location.href = "student.html"; // Redirect to student page
-          }, 1500);
-        }
-      } else {
-        document.getElementById("message").innerHTML = '<p class="text-danger">Please fill in all fields.</p>';
-      }
-    }
+    // Trigger modal on clicking the Learning section
+    document.querySelector("#learningSection").addEventListener("click", () => {
+        modal.style.display = "flex";
+    });
+
+    // Redirect to login page
+    loginButton.addEventListener("click", () => {
+        window.location.href = "assessment-login.html";
+    });
+
+    // Show registration form
+    registerButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.querySelector(".register-container").style.display = "block";
+    });
+});
+
+function handleRegister(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const username = document.getElementById("username").value;
+    const language = document.getElementById("language").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const user = { username, email, password };
+
+    // Send registration data to the backend
+    fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+    })
+        .then((response) => {
+            if (response.status === 409) {
+                // Email already exists
+                document.getElementById("emailExistsModal").style.display = "flex";
+                return;
+            } else if (!response.ok) {
+                throw new Error("Registration failed. Please try again.");
+            }
+            return response.text();
+        })
+        .then(() => {
+            // Registration success
+            document.getElementById("message").innerHTML =
+                '<p class="text-success">Registration successful!</p>';
+            setTimeout(() => {
+                window.location.href = "student.html"; // Redirect to student page after 4s
+            }, 4000);
+        })
+        .catch((error) => {
+            document.getElementById("message").innerHTML =
+                `<p class="text-danger">${error.message}</p>`;
+        });
+}
+
+// Handle the "Go to Login" button in the modal
+document.getElementById("redirectToLogin").addEventListener("click", () => {
+    window.location.href = "assessment-login.html"; // Redirect to login page
+});
+function handleLogin(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const credentials = { username, password };
+
+    // Send login data to the backend
+    fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return response.text().then((message) => {
+                    throw new Error(message);
+                });
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // Save authentication token to localStorage
+            localStorage.setItem("authToken", data.token);
+
+            // Redirect to the student page
+            window.location.href = "student.html";
+        })
+        .catch((error) => {
+            document.getElementById("message").innerHTML = `<p class="text-danger">${error.message}</p>`;
+        });
+}
   </script>
 
 </body>
