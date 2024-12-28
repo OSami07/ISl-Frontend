@@ -133,9 +133,10 @@ assessment-login.html
 
   <script>
     function goToassessmentquestionsPage() {
-      // Redirect to the assessment-questions page and replace the current page in history
-      window.location.replace("assessment-questions.html"); // Replace with the actual assessment-questions page URL
-    }
+    const redirectParam = new URLSearchParams(window.location.search).get("redirect");
+    const redirectUrl = redirectParam ? redirectParam : "assessment-questions.html";
+    window.location.replace(redirectUrl); // Redirect to the specified page or default to assessment-questions.html
+}
   </script>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

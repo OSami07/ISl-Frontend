@@ -136,10 +136,10 @@
         <div class="modal-body text-center">
           <p>Would you like to log in or register?</p>
           <div class="d-flex justify-content-around">
-            <a href="assessment-login.html?lang=mr" class="btn btn-primary">Log In</a>
-            <a href="student-register.html?lang=mr" class="btn btn-success">Register</a>
+            <a href="assessment-login.html?redirect=menu.html" class="btn btn-primary">Log In</a>
+            <a href="student-register.html?redirect=menu.html" class="btn btn-success">Register</a>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
@@ -156,6 +156,25 @@
   <script src="assets/js/main.js"></script>
 
   <script src="assets/js/language.js"></script>
+
+  <script>
+    // Utility to get URL parameters
+    function getUrlParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+  
+    // Check if the 'popup' parameter exists
+    if (getUrlParam('popup') === 'true') {
+      const modal = new bootstrap.Modal(document.getElementById('loginRegisterModal'));
+      modal.show();
+  
+      // Remove 'popup' from the URL after showing the modal
+      const newUrl = window.location.href.split('?')[0];
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  </script>
+  
 
 </body>
 

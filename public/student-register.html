@@ -289,7 +289,7 @@ function handleRegister(event) {
             document.getElementById("message").innerHTML =
                 '<p class="text-success">Registration successful!</p>';
             setTimeout(() => {
-                window.location.href = "student.html"; // Redirect to student page after 4s
+                window.location.href = "menu.html"; // Redirect to menu page after 4s
             }, 4000);
         })
         .catch((error) => {
@@ -299,9 +299,14 @@ function handleRegister(event) {
 }
 
 // Handle the "Go to Login" button in the modal
+// document.getElementById("redirectToLogin").addEventListener("click", () => {
+//     window.location.href = "assessment-login.html"; // Redirect to login page
+// });
+
 document.getElementById("redirectToLogin").addEventListener("click", () => {
-    window.location.href = "assessment-login.html"; // Redirect to login page
+    window.location.href = "assessment-login.html?redirect=menu.html"; // Redirect with return parameter
 });
+
 function handleLogin(event) {
     event.preventDefault(); // Prevent form submission
 
