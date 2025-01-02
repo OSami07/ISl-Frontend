@@ -12,8 +12,42 @@
       background-color: #f9f9f9;
       margin: 0;
       font-family: Arial, sans-serif;
-      height: 100vh;
-      display: flex;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    section h2 {
+      color: #007bff;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #007bff;
+      color: white;
+      margin-top: 20px;
+    }
+    .blue-banner {
+      background-color: #007bff;
+      height: 60px;
+      width: 100%;
     }
 
     .main-container {
@@ -28,7 +62,7 @@
       padding: 20px 10px;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       position: fixed;
-      top: 0;
+      top: 0.5;
       bottom: 0;
       left: 0;
       z-index: 1;
@@ -56,7 +90,7 @@
     }
 
     .sidebar button:hover {
-      background-color: #3b4e8c;
+      background-color: #eff1f6;
       transform: scale(1.05);
     }
 
@@ -174,6 +208,59 @@
       margin: auto;
     }
 
+    
+    /* Styling for the input field */
+    #assessment1-score {
+      width: 200px; /* Increase the width */
+      height: 40px; /* Adjust the height */
+      font-size: 1.2rem; /* Make the text larger */
+      padding: 5px 10px; /* Add padding for better spacing */
+      border: 2px solid #007bff; /* Add a border with a color */
+      border-radius: 8px; /* Make the corners rounded */
+      outline: none; /* Remove the default focus outline */
+      transition: all 0.3s ease; /* Add a smooth transition effect */
+    }
+
+    /* Add a hover effect */
+    #assessment1-score:hover {
+      border-color: #0056b3; /* Change border color on hover */
+    }
+
+    /* Add a focus effect */
+    #assessment1-score:focus {
+      border-color: #0056b3; /* Change border color when focused */
+      box-shadow: 0 0 8px rgba(0, 91, 187, 0.5); /* Add a glowing effect */
+    }
+    
+    button {
+      background-color: #4CAF50; /* Green background */
+      color: white; /* White text */
+      border: none; /* Remove borders */
+      border-radius: 8px; /* Rounded corners */
+      padding: 12px 24px; /* Padding */
+      font-size: 16px; /* Font size */
+      font-weight: bold; /* Bold text */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: all 0.3s ease; /* Smooth transition effect */
+    }
+
+    button:hover {
+      background-color: #45a049; /* Slightly darker green on hover */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+    button:active {
+      background-color: #3e8e41; /* Even darker green when clicked */
+      transform: translateY(2px); /* Slight depression on click */
+    }
+
+    button:disabled {
+      background-color: #ccc; /* Gray background when disabled */
+      cursor: not-allowed; /* Not-allowed cursor for disabled state */
+      opacity: 0.6; /* Slightly transparent */
+    }
+
     .draggable {
       cursor: grab;
       background-color: #f0f0f0;
@@ -245,6 +332,39 @@
   </style>
 </head>
 <body>
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <h1 class="sitename">ISL Mate</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="index.html?lang=mr">Home</a></li>
+                <li><a href="about.html?lang=mr">About</a></li>
+                <li><a href="menu.html?lang=mr">Menu</a></li>
+                <li><a href="contact.html?lang=mr">Contact</a></li>
+                <li><a href="instructions.html?lang=mr">Instructions</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+    </div>
+</header>
+<main class="main">
+  <div class="page-title" data-aos="fade">
+    <div class="heading">
+      <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+          <div class="col-lg-8">
+            <h1>Fun with Assessements</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<body>
   <div class="main-container">
     <div class="sidebar">
       <h2>TAKE THE ASSESSMENTS</h2>
@@ -256,13 +376,22 @@
     </div>
 
     <div class="content-area">
-      <h1>Fun with Assessment</h1>
-      <div class="title-underline"></div>
+      <h1></h1>
       <div id="assessment-content"></div>
     </div>
   </div>
 
   <script>
+    let scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    let maxScores = { 1: 16, 2: 5, 3: 10, 4: 5, 5: 5 }; // Max scores per assessment
+
+    function validateScore(input) {
+      const max = parseInt(input.max, 10);
+      const min = parseInt(input.min, 10);
+      if (input.value > max) input.value = max;
+      if (input.value < min) input.value = min;
+    }
+
     function createFlipCard(frontText, backImagePath) {
       return `
         <div class="flip-card">
@@ -304,10 +433,18 @@
 
     function showResult(button, isCorrect) {
       const resultDiv = document.createElement('div');
-      resultDiv.className = `result ${isCorrect ? 'correct' : 'wrong'}`;
+      resultDiv.className = result `${isCorrect ? 'correct' : 'wrong'}`;
       resultDiv.textContent = isCorrect ? '✔ Correct!' : '✘ Wrong!';
+
+      if (!isCorrect) {
+        resultDiv.innerHTML += ` Correct answer: ${button.getAttribute('data-correct')}`;
+      }
+
       button.parentElement.appendChild(resultDiv);
       button.disabled = true;
+      if (isCorrect) {
+        scores[assessmentNumber]++;
+      }
     }
 
     function showAssessment(assessmentNumber) {
@@ -330,8 +467,7 @@
               ${createFlipCard("V", "assets/img/assessment-1/V.png")}
               ${createFlipCard("R", "assets/img/assessment-1/R.png")}
               ${createFlipCard("B", "assets/img/assessment-1/B.png")}
-            </div>
-            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">2. Try the signs for the numbers given below using your hands.</p>
+            </div><p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">2. Try the signs for the numbers given below using your hands.</p>
             <div class="grid-container">
               ${createFlipCard("5", "assets/img/assessment-1/5.png")}
               ${createFlipCard("8", "assets/img/assessment-1/8.png")}
@@ -344,6 +480,9 @@
               ${createFlipCard("6", "assets/img/assessment-1/6.png")}
               ${createFlipCard("1", "assets/img/assessment-1/1.png")}
             </div>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">How many you got correct:</p>
+            <input type="number" id="assessment1-score" placeholder="Enter your score" min="0" max="16" oninput="validateScore(this)">
+            <button onclick="saveScore(1, document.getElementById('assessment1-score').value)">Next Assessment</button>
           `;
           break;
 
@@ -377,39 +516,9 @@
                 </div>
               </div>
             </div>
+            <button onclick="saveScore(2, calculateDragAndDropScore())">Next Assessment</button>
           `;
-
-          const draggables = document.querySelectorAll('.draggable');
-          const droppables = document.querySelectorAll('.droppable');
-
-          draggables.forEach(draggable => {
-            draggable.addEventListener('dragstart', () => {
-              draggable.classList.add('dragging');
-            });
-
-            draggable.addEventListener('dragend', () => {
-              draggable.classList.remove('dragging');
-            });
-          });
-
-          droppables.forEach(droppable => {
-            droppable.addEventListener('dragover', e => {
-              e.preventDefault();
-            });
-
-            droppable.addEventListener('drop', e => {
-              const draggingElement = document.querySelector('.dragging');
-              const letter = draggingElement.getAttribute('data-letter');
-              const targetLetter = droppable.getAttribute('data-letter');
-
-              if (letter === targetLetter) {
-                droppable.appendChild(draggingElement);
-                alert('✔ Correct!');
-              } else {
-                alert('✘ Wrong! Try again.');
-              }
-            });
-          });
+          enableDragAndDrop();
           break;
 
         case 3:
@@ -430,6 +539,9 @@
               ${createFlipCardWithVideo('assets/img/assessment-3/teeth.jpeg', 'Teeth', "assets/img/assessment-3/videos/Teeth.MOV")}
               ${createFlipCardWithVideo('assets/img/assessment-3/night.jpeg', 'Night', "assets/img/assessment-3/videos/night.MOV")}
             </div>
+            <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">How many you got correct:</p>
+            <input type="number" id="assessment1-score" placeholder="Enter your score" min="0" max="10" oninput="validateScore(this)">
+            <button onclick="saveScore(3, document.getElementById('assessment1-score').value)">Next Assessment</button>
           `;
           break;
 
@@ -440,25 +552,26 @@
             <div class="mcq-container">
                 <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">1) P Q _ S:</p>
                 <div class="mcq-option">
-                    ${generateMCQ(['D', 'R', 'X', 'G'], 1, 'R')}
+                    ${generateMCQ(['D', 'R', 'X', 'G'], 1, 'R', '4')}
                 </div>
                 <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">2) A B C _ :</p>
                 <div class="mcq-option">
-                    ${generateMCQ(['Q', 'F', 'K', 'D'], 2, 'D')}
+                    ${generateMCQ(['Q', 'F', 'K', 'D'], 2, 'D', '4')}
                 </div>
                 <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">3) _ X Y Z :</p>
                 <div class="mcq-option">
-                    ${generateMCQ(['W', 'V', 'A', 'X'], 3, 'W')}
+                    ${generateMCQ(['W', 'V', 'A', 'X'], 3, 'W', '4')}
                 </div>
                 <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">4) H _ J K :</p>
                 <div class="mcq-option">
-                    ${generateMCQ(['I', 'D', 'M', 'S'], 4, 'I')}
+                    ${generateMCQ(['I', 'D', 'M', 'S'], 4, 'I', '4')}
                 </div>
                 <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">5 _ T U V :</p>
                 <div class="mcq-option">
-                    ${generateMCQ(['H', 'S', 'K', 'B'], 5, 'S')}
+                    ${generateMCQ(['H', 'S', 'K', 'B'], 5, 'S', '4')}
                 </div>
             </div>
+            <button onclick="saveScore(4, scores[4])">Next Assessment</button>
           `;
           break;
 
@@ -469,49 +582,77 @@
             <div class="mcq-container">
               <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">1) 4 _ 6:</p>
               <div class="mcq-option">
-                ${generateMCQ(['2', '3', '9', '5'], 1, '5')}
+                ${generateMCQ(['2', '3', '9', '5'], 1, '5', '5')}
               </div>
               <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">2) _ 3 4:</p>
               <div class="mcq-option">
-                ${generateMCQ(['8', '9', '2', '1'], 2, '2')}
+                ${generateMCQ(['8', '9', '2', '1'], 2, '2', '5')}
               </div>
               <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">3) 7 8 _ :</p>
               <div class="mcq-option">
-                ${generateMCQ(['O', '3', '5', '9'], 3, '9')}
+                ${generateMCQ(['0', '3', '5', '9'], 3, '9', '5')}
               </div>
               <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">4) 5 _ 7 :</p>
               <div class="mcq-option">
-                ${generateMCQ(['6', 'O', '3', '1'], 4, '6')}
+                ${generateMCQ(['6', '0', '3', '1'], 4, '6', '5')}
               </div>
               <p style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">5) _ 1 2 :</p>
               <div class="mcq-option">
-                ${generateMCQ(['O', '6', '4', '8'], 5, 'O')}
+                ${generateMCQ(['0', '6', '4', '8'], 5, '0', '5')}
               </div>
             </div>
+            <button onclick="saveScore(5, scores[5])">View Score</button>
           `;
           break;
 
         default:
           contentDiv.innerHTML = '<p>No assessment found!</p>';
           break;
-        }
       }
-    
-    // Function to generate MCQ options dynamically
-    function generateMCQ(options, questionNumber, correctAnswer) {
+    }
+
+    function generateMCQ(options, questionNumber, correctAnswer, assessmentNumber) {
         return options.map(option => `
             <label style="margin-right: 20px; cursor: pointer; display: inline-block;">
                 <input type="radio" name="q${questionNumber}" value="${option}" style="display: none;" 
-                       onclick="checkAnswer(this, ${questionNumber}, '${correctAnswer}')">
+                       onclick="checkAnswerAssessment45(this, ${questionNumber}, '${correctAnswer}', ${assessmentNumber})">
                 <img src="assets/img/assessment-4,5/${option}.png" alt="${option}" 
                      style="width: 100px; height: 100px; border: 2px solid #ccc; border-radius: 5px; padding: 5px;">
             </label>
-        `).join('') + `<div id="result-q${questionNumber}" style="margin-top: 10px; font-size: 1.2rem;"></div>`;
-    }
+        `)
+        .join('') + `<div id="result-q${questionNumber}" style="margin-top: 10px; font-size: 1.2rem;"></div>`;
+    }
 
-    function checkAnswer(inputElement, questionNumber, correctAnswer) {
+    function checkAnswer(radioButton, assessmentNumber, correctAnswer) {
+        const resultDiv = document.getElementById(`result-q${assessmentNumber}`);
+        if (radioButton.value === correctAnswer) {
+            resultDiv.textContent = "Correct!";
+            resultDiv.style.color = "green";
+            scores[4]++; // Ensure the correct index is updated
+        } else {
+            resultDiv.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            resultDiv.style.color = "red";
+        }
+    }
+
+    function checkAnswerAssessment45(selectedOption, questionNumber, correctAnswer, assessmentNumber) {
         const resultDiv = document.getElementById(`result-q${questionNumber}`);
-        const selectedValue = inputElement.value;
+    
+        // Check if the selected answer matches the correct answer
+        if (selectedOption.value === correctAnswer) {
+            resultDiv.innerHTML = "Correct!";
+            resultDiv.style.color = "green";
+            // Update the score for the correct answer
+            scores[assessmentNumber]++;
+        } else {
+            resultDiv.innerHTML = `Incorrect! The correct answer is: ${correctAnswer}`;
+            resultDiv.style.color = "red";
+        }
+
+        // Optionally, disable the radio buttons after selection
+        const radioButtons = document.getElementsByName(`q${questionNumber}`);
+        radioButtons.forEach(radio => radio.disabled = true);
+    }
 
         // Highlight selected image and reset others
          const options = document.getElementsByName(`q${questionNumber}`);
@@ -520,24 +661,69 @@
             img.style.border = '2px solid #ccc'; // Reset all borders
         });
 
-        const selectedImg = inputElement.parentElement.querySelector('img');
-        selectedImg.style.border = selectedValue === correctAnswer ? '2px solid green' : '2px solid red';
-
-        // Display result message
-        if (selectedValue === correctAnswer) {
-            resultDiv.innerHTML = `<span style="color: green;">Correct Answer!</span>`;
-        } else {
-            resultDiv.innerHTML = `<span style="color: red;">Incorrect Answer. Try Again!</span>`;
-        }
+    function nextAssessment(nextAssessmentNumber) {
+      showAssessment(nextAssessmentNumber);
     }
 
+    function saveScore(assessmentNumber, score) {
+        score = parseInt(score, 10) || 0; // Default to 0 if invalid
+        if (score >= 0 && score <= maxScores[assessmentNumber]) {
+            scores[assessmentNumber] = score;
+           //console.log(Saved Assessment ${assessmentNumber} Score:, score); // Debug log
+            if (assessmentNumber < 5) showAssessment(assessmentNumber + 1);
+            else viewScore();
+        } else {
+            alert(`Invalid score! Please enter a value between 0 and ${maxScores[assessmentNumber]}.`);
+        } 
+    }
+
+    function enableDragAndDrop() {
+      const draggables = document.querySelectorAll('.draggable');
+      const droppables = document.querySelectorAll('.droppable');
+
+      draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+          draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+          draggable.classList.remove('dragging');
+        });
+      });
+
+      droppables.forEach(droppable => {
+        droppable.addEventListener('dragover', e => {
+          e.preventDefault();
+          const draggable = document.querySelector('.dragging');
+          droppable.appendChild(draggable);
+        });
+      });
+    }
+
+    function calculateDragAndDropScore() {
+      let score = 0;
+      const droppables = document.querySelectorAll('.droppable');
+      droppables.forEach(droppable => {
+        const letter = droppable.getAttribute('data-letter');
+        const child = droppable.querySelector('.draggable');
+        if (child && child.getAttribute('data-letter') === letter) {
+          score++;
+        }
+      });
+      console.log("Assessment 2 score:", score); // Debug log
+      return score;
+    }
+
+    function viewScore() {
+      const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+      let scoreText = "<h2>Your Scores:</h2>";
+      for (let i = 1; i <= 5; i++) {
+        scoreText += `<p>Assessment ${i}: ${scores[i]} out of ${maxScores[i]}</p>`;
+      }
+      scoreText += `<p><strong>Total Score: ${totalScore} out of ${Object.values(maxScores).reduce((a, b) => a + b, 0)}</strong></p>`;
+      document.getElementById('assessment-content').innerHTML = scoreText;
+    }
   </script>
+
+
 </body>
-</html>
-
-
-<script>
-  function goBackToMenu() {
-    window.location.href = "menu.html"; // Replace with the actual menu page URL
-  }
-</script>
