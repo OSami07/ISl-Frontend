@@ -44,14 +44,35 @@
           <li><a href="menu.html?lang=mr" class="active">Menu</a></li>
           <li><a href="contact.html?lang=mr">Contact</a></li>
           <li><a href="instructions.html?lang=mr">Instructions</a></li>
+          <li><a href="learningFeedback.html">Feedback</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
     </div>
   </header>
 
-  <!-- Google Translate Widget -->
-  <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div>
+   <!-- Google Translate Widget -->
+  <!-- <div id="google_translate_element" style="position: fixed; top: 10px; right: 550px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div> -->
+  <div id="google_translate_element"
+     style="
+        position: fixed;
+        top: 20px;
+        right: 600px;
+        z-index: 1000;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+     "
+     onmouseover="this.style.backgroundColor='#0056b3'"
+     onmouseout="this.style.backgroundColor='#007bff'">
+</div>
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -78,7 +99,6 @@
       </div>
     </div><!-- End Page Title -->
 
-    <!-- Courses Section -->
     <section id="courses" class="courses section">
 
       <div class="container">
@@ -90,8 +110,8 @@
               <img src="assets\img\Student.jpg" class="img-fluid" alt="..." style="height: 200px;">
               <div class="course-content">
                 <h3>
-                  <!-- <a href="student-register.html?lang=mr">Learning Section</a> -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginRegisterModal">Learning Section</a>
+                  <a href="language.html">Learning Section</a>
+                  <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#loginRegisterModal">Learning Section</a> -->
                 </h3>
                 <p class="description">Learn numbers, alphabets and words</p>
                 <div class="trainer d-flex justify-content-between align-items-center">
@@ -104,7 +124,7 @@
             <div class="course-item">
               <img src="assets\img\Gaurdian (1).jpeg" class="img-fluid" alt="...">
               <div class="course-content">
-                <h3><a href="assessment-login.html?lang=mr">Assessment</a></h3>
+                <h3><a href="assessment-questions.html?lang=mr">Assessment</a></h3>
                 <p class="description">Assess yourself</p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                 </div>
@@ -125,19 +145,18 @@
   <!-- Preloader -->
   <div id="preloader"></div>
 
-  <!-- Modal for Login/Register -->
   <div class="modal fade" id="loginRegisterModal" tabindex="-1" aria-labelledby="loginRegisterModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="loginRegisterModalLabel">Choose an Option</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body text-center">
           <p>Would you like to log in or register?</p>
           <div class="d-flex justify-content-around">
-            <a href="assessment-login.html?redirect=menu.html" class="btn btn-primary">Log In</a>
-            <a href="student-register.html?redirect=menu.html" class="btn btn-success">Register</a>
+            <a href="login.html?redirect=menu.html" class="btn btn-primary">Log In</a>
+            <a href="register.html?redirect=menu.html" class="btn btn-success">Register</a>
           </div>
         </div>        
       </div>

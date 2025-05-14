@@ -123,7 +123,27 @@
   </header>
 
   <!-- Google Translate Widget -->
-  <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div>
+  <!-- <div id="google_translate_element" style="position: fixed; top: 10px; right: 550px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div> -->
+  <div id="google_translate_element"
+     style="
+        position: fixed;
+        top: 20px;
+        right: 750px;
+        z-index: 1000;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+     "
+     onmouseover="this.style.backgroundColor='#0056b3'"
+     onmouseout="this.style.backgroundColor='#007bff'">
+</div>
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -134,7 +154,6 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
   <!-- Main Content -->
   <main class="main">
     <div class="page-title" data-aos="fade">

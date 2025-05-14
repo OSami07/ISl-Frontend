@@ -33,29 +33,41 @@
         <h4 class="sitename" style="font-family:'Gill Sans';">Learn, Connect, and Empower!</h4>
       </a>
 
-      <!-- <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="menu.html">Menu</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav> -->
-
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="test.html?lang=mr" >Home</a></li>
+          <li><a href="index.html?lang=mr" >Home</a></li>
           <li><a href="about.html?lang=mr" class="active">About</a></li>
           <li><a href="menu.html?lang=mr">Menu</a></li>
           <li><a href="contact.html?lang=mr">Contact</a></li>
           <li><a href="instruction.html?lang=mr">Instructions</a></li>
+          <li><a href="learningFeedback.html">Feedback</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
     </div>
   </header><!-- End Header -->
-  <!-- Google Translate Widget -->
-  <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div>
+   <!-- Google Translate Widget -->
+  <!-- <div id="google_translate_element" style="position: fixed; top: 10px; right: 550px; z-index: 1000; background: #f9f9f9; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></div> -->
+  <div id="google_translate_element"
+     style="
+        position: fixed;
+        top: 20px;
+        right: 600px;
+        z-index: 1000;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+     "
+     onmouseover="this.style.backgroundColor='#0056b3'"
+     onmouseout="this.style.backgroundColor='#007bff'">
+</div>
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -66,8 +78,6 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
   <main class="main">
 
     <!-- About Section -->
